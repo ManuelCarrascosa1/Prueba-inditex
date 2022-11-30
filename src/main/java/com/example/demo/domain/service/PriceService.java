@@ -10,7 +10,7 @@ import com.example.demo.domain.aggregates.Price;
 import com.example.demo.domain.exception.PriceNotFoundException;
 import com.example.demo.domain.repositories.PriceRepository;
 
-@Service
+
 public class PriceService {
 	
 	private PriceRepository priceRepository;

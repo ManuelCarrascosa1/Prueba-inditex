@@ -10,11 +10,12 @@ import com.example.demo.domain.service.PriceService;
 @Configuration
 public class ApplicationConfig {
 
+
 	@Bean
-	public PriceService priceService(PriceRepository priceRepository) {
-		return new PriceService(priceRepository);	
-		
+	public  PriceService priceService (PriceRepository pricerepository) {
+		return new PriceService(pricerepository);
 	}
+	
 	@Bean
 	public SearchPriceUseCase searchPriceUseCase(PriceService priceService) {
 		return new SearchPriceUseCase(priceService);

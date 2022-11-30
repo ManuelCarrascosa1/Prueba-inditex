@@ -29,10 +29,10 @@ public class SearchPriceBusinessTest {
 	@Test
 	public void shouldSearchPriceFirstCase() throws PriceNotFoundException  {
 		
-		Mockito.when(((OngoingStubbing) priceRepository.findAll()).thenReturn(this.getPrices()));
+	Mockito.when(priceRepository.findAll()).thenReturn(this.getPrices());
 		
 		SearchPriceRequest request = SearchPriceRequest.builder()
-			.date(FormatUtil.dateParse("2020-06-14-10.00.00"))
+			.date(FormatUtil.dateParse("2020-06-15-16.00.00"))
 			.productId("35455")
 			.BrandId("1")
 			.build();
@@ -41,20 +41,19 @@ public class SearchPriceBusinessTest {
 		
 		assertEquals("35455", response.getProductId());
 		assertEquals("1", response.getBrandId());
-		assertEquals("2020-06-14-00.00.00",response.getDateStart());
+		assertEquals("2020-06-14-10.00.00",response.getDateStart());
 		assertEquals("2020-12-31-23.59.59",response.getDateEnd());
-		assertEquals("0", response.getRate());
-		assertEquals("35.50 EUR", response.getPrice());
-		
+		assertEquals("1", response.getRate());
+		assertEquals("35,50 EUR", response.getPrice());
 	}
 	
 	@Test
 	public void shouldSearchPriceSecondCase() throws PriceNotFoundException  {
 		
-		Mockito.when(((OngoingStubbing) priceRepository.findAll()).thenReturn(this.getPrices()));
+		Mockito.when(priceRepository.findAll()).thenReturn(this.getPrices());
 		
 		SearchPriceRequest request = SearchPriceRequest.builder()
-			.date(FormatUtil.dateParse("2020-06-14-16.00.00"))
+			.date(FormatUtil.dateParse("2020-06-15-10.00.00"))
 			.productId("35455")
 			.BrandId("1")
 			.build();
@@ -63,17 +62,17 @@ public class SearchPriceBusinessTest {
 		
 		assertEquals("35455", response.getProductId());
 		assertEquals("1", response.getBrandId());
-		assertEquals("2020-06-14-15.00.00",response.getDateStart());
-		assertEquals("2020-06-14-18.30.00",response.getDateEnd());
-		assertEquals("1", response.getRate());
-		assertEquals("25.45 EUR", response.getPrice());
+		assertEquals("2020-06-15-00.00.00",response.getDateStart());
+		assertEquals("2020-06-15-11.00.00",response.getDateEnd());
+		assertEquals("3", response.getRate());
+		assertEquals("30,50 EUR", response.getPrice());
 		
 	}
 	
 	@Test
 	public void shouldSearchPricethirdCase() throws PriceNotFoundException  {
 		
-		Mockito.when(((OngoingStubbing) priceRepository.findAll()).thenReturn(this.getPrices()));
+		Mockito.when(priceRepository.findAll()).thenReturn(this.getPrices());
 		
 		SearchPriceRequest request = SearchPriceRequest.builder()
 			.date(FormatUtil.dateParse("2020-06-14-21.00.00"))
@@ -85,10 +84,10 @@ public class SearchPriceBusinessTest {
 		
 		assertEquals("35455", response.getProductId());
 		assertEquals("1", response.getBrandId());
-		assertEquals("2020-06-14-00.00.00",response.getDateStart());
+		assertEquals("2020-06-14-10.00.00",response.getDateStart());
 		assertEquals("2020-12-31-23.59.59",response.getDateEnd());
-		assertEquals("2", response.getRate());
-		assertEquals("35.50 EUR", response.getPrice());
+		assertEquals("1", response.getRate());
+		assertEquals("35,50 EUR", response.getPrice());
 		
 	}
 	
@@ -96,7 +95,7 @@ public class SearchPriceBusinessTest {
 	@Test
 	public void shouldSearchPriceFourthCase() throws PriceNotFoundException  {
 		
-		Mockito.when(((OngoingStubbing<OngoingStubbing>) priceRepository.findAll()).thenReturn((OngoingStubbing) this.getPrices()));
+		Mockito.when(priceRepository.findAll()).thenReturn(this.getPrices());
 		
 		SearchPriceRequest request = SearchPriceRequest.builder()
 			.date(FormatUtil.dateParse("2020-06-15-10.00.00"))
@@ -107,11 +106,11 @@ public class SearchPriceBusinessTest {
 		SearchPriceResponse response= searchPriceUseCase.execute(request);
 		
 		assertEquals("35455", response.getProductId());
-		assertEquals("4", response.getBrandId());
+		assertEquals("1", response.getBrandId());
 		assertEquals("2020-06-15-00.00.00",response.getDateStart());
 		assertEquals("2020-06-15-11.00.00",response.getDateEnd());
 		assertEquals("3", response.getRate());
-		assertEquals("30.50 EUR", response.getPrice());
+		assertEquals("30,50 EUR", response.getPrice());
 		
 	}
 	
@@ -119,10 +118,10 @@ public class SearchPriceBusinessTest {
 	@Test
 	public void shouldSearchPriceFiveCase() throws PriceNotFoundException  {
 		
-		Mockito.when(((OngoingStubbing<OngoingStubbing>) priceRepository.findAll()).thenReturn((OngoingStubbing) this.getPrices()));
+		Mockito.when(priceRepository.findAll()).thenReturn(this.getPrices());
 		
 		SearchPriceRequest request = SearchPriceRequest.builder()
-			.date(FormatUtil.dateParse("2020-06-16-21.00.00"))
+			.date(FormatUtil.dateParse("2020-06-16-16.00.00"))
 			.productId("35455")
 			.BrandId("1")
 			.build();
@@ -130,11 +129,11 @@ public class SearchPriceBusinessTest {
 		SearchPriceResponse response= searchPriceUseCase.execute(request);
 		
 		assertEquals("35455", response.getProductId());
-		assertEquals("4", response.getBrandId());
+		assertEquals("1", response.getBrandId());
 		assertEquals("2020-06-15-16.00.00",response.getDateStart());
 		assertEquals("2020-12-31-23.59.59",response.getDateEnd());
 		assertEquals("4", response.getRate());
-		assertEquals("38.95 EUR", response.getPrice());
+		assertEquals("38,95 EUR", response.getPrice());
 		
 	}
 	
